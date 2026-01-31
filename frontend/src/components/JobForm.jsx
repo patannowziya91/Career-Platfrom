@@ -71,120 +71,123 @@ const JobForm = ({ jobToEdit, clearEdit }) => {
     };
 
     return (
-        <section className="bg-white p-6 rounded-lg shadow-md mb-8 border border-gray-100">
-            <h2 className="text-xl font-bold mb-4 text-gray-800">{jobToEdit ? 'Edit Job' : 'Post a New Job'}</h2>
-            <form onSubmit={onSubmit}>
-                <div className="grid grid-cols-1 gap-4">
-                    <div className="form-group">
-                        <label className="block text-sm font-medium text-gray-700">Job Title</label>
+        <form onSubmit={onSubmit} className="space-y-5">
+            <div className="space-y-4">
+                <div className="group">
+                    <label className="block text-sm font-bold text-slate-700 mb-2 ml-1">Job Title</label>
+                    <input
+                        type="text"
+                        name="title"
+                        value={title}
+                        onChange={onChange}
+                        className="block w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all duration-200"
+                        placeholder="e.g. Senior Software Engineer"
+                        required
+                    />
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                    <div className="group">
+                        <label className="block text-sm font-bold text-slate-700 mb-2 ml-1">Location</label>
                         <input
                             type="text"
-                            name="title"
-                            value={title}
+                            name="location"
+                            value={location}
                             onChange={onChange}
-                            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500"
+                            className="block w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all duration-200"
+                            placeholder="City, Country"
                             required
                         />
                     </div>
-                    <div className="grid grid-cols-2 gap-4">
-                        <div className="form-group">
-                            <label className="block text-sm font-medium text-gray-700">Location</label>
-                            <input
-                                type="text"
-                                name="location"
-                                value={location}
-                                onChange={onChange}
-                                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500"
-                                required
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label className="block text-sm font-medium text-gray-700">Salary</label>
-                            <input
-                                type="text"
-                                name="salaryRange"
-                                value={salaryRange}
-                                onChange={onChange}
-                                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500"
-                                placeholder="e.g. $50k - $70k"
-                                required
-                            />
-                        </div>
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
-                        <div className="form-group">
-                            <label className="block text-sm font-medium text-gray-700">Category</label>
-                            <input
-                                type="text"
-                                name="category"
-                                value={category}
-                                onChange={onChange}
-                                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500"
-                                required
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label className="block text-sm font-medium text-gray-700">Type</label>
-                            <select
-                                name="jobType"
-                                value={jobType}
-                                onChange={onChange}
-                                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500"
-                            >
-                                <option value="Full-time">Full-time</option>
-                                <option value="Part-time">Part-time</option>
-                                <option value="Remote">Remote</option>
-                                <option value="Contract">Contract</option>
-                                <option value="Internship">Internship</option>
-                            </select>
-                        </div>
+                    <div className="group">
+                        <label className="block text-sm font-bold text-slate-700 mb-2 ml-1">Salary</label>
+                        <input
+                            type="text"
+                            name="salaryRange"
+                            value={salaryRange}
+                            onChange={onChange}
+                            className="block w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all duration-200"
+                            placeholder="e.g. $80k - $120k"
+                            required
+                        />
                     </div>
                 </div>
 
-                <div className="form-group mt-4">
-                    <label className="block text-sm font-medium text-gray-700">Description</label>
+                <div className="grid grid-cols-2 gap-4">
+                    <div className="group">
+                        <label className="block text-sm font-bold text-slate-700 mb-1 ml-1">Category</label>
+                        <input
+                            type="text"
+                            name="category"
+                            value={category}
+                            onChange={onChange}
+                            className="block w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all duration-200"
+                            placeholder="IT, Design, etc."
+                            required
+                        />
+                    </div>
+                    <div className="group">
+                        <label className="block text-sm font-bold text-slate-700 mb-1 ml-1">Job Type</label>
+                        <select
+                            name="jobType"
+                            value={jobType}
+                            onChange={onChange}
+                            className="block w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all duration-200"
+                        >
+                            <option value="Full-time">Full-time</option>
+                            <option value="Part-time">Part-time</option>
+                            <option value="Remote">Remote</option>
+                            <option value="Contract">Contract</option>
+                            <option value="Internship">Internship</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div className="group">
+                    <label className="block text-sm font-bold text-slate-700 mb-1 ml-1">Description</label>
                     <textarea
                         name="description"
                         value={description}
                         onChange={onChange}
-                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500"
+                        className="block w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all duration-200 resize-none"
                         rows="3"
+                        placeholder="Tell us about the role..."
                         required
                     ></textarea>
                 </div>
 
-                <div className="form-group mt-4">
-                    <label className="block text-sm font-medium text-gray-700">Requirements</label>
+                <div className="group">
+                    <label className="block text-sm font-bold text-slate-700 mb-1 ml-1">Requirements</label>
                     <textarea
                         name="requirements"
                         value={requirements}
                         onChange={onChange}
-                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500"
+                        className="block w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all duration-200 resize-none"
                         rows="3"
-                        placeholder="List requirements..."
+                        placeholder="List the key requirements..."
                         required
                     ></textarea>
                 </div>
+            </div>
 
-                <div className="mt-4 flex space-x-3">
+            <div className="flex flex-col space-y-3 pt-2">
+                <button
+                    type="submit"
+                    className="w-full bg-indigo-600 text-white py-4 px-6 rounded-2xl font-bold hover:bg-indigo-700 shadow-lg shadow-indigo-100 hover:shadow-indigo-200 active:scale-[0.98] transition-all duration-200"
+                >
+                    {jobToEdit ? 'Update Job Posting' : 'Publish Job Opportunity'}
+                </button>
+                {jobToEdit && (
                     <button
-                        type="submit"
-                        className="flex-1 bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition"
+                        type="button"
+                        onClick={onCancel}
+                        className="w-full bg-slate-100 text-slate-600 py-3 px-6 rounded-2xl font-bold hover:bg-slate-200 transition-all duration-200"
                     >
-                        {jobToEdit ? 'Update Job' : 'Publish Job'}
+                        Cancel Editing
                     </button>
-                    {jobToEdit && (
-                        <button
-                            type="button"
-                            onClick={onCancel}
-                            className="flex-1 bg-gray-200 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-300 transition"
-                        >
-                            Cancel Edit
-                        </button>
-                    )}
-                </div>
-            </form>
-        </section>
+                )}
+            </div>
+        </form>
     );
 };
 

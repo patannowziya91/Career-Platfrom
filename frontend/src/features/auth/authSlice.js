@@ -12,12 +12,14 @@ const initialState = {
     message: '',
 };
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 // Register user
 export const register = createAsyncThunk(
     'auth/register',
     async (userData, thunkAPI) => {
         try {
-            const response = await axios.post('http://localhost:5000/api/auth/register', userData);
+            const response = await axios.post(`${API_BASE_URL}/auth/register`, userData);
 
             if (response.data) {
                 localStorage.setItem('user', JSON.stringify(response.data));
@@ -39,7 +41,7 @@ export const register = createAsyncThunk(
 // Login user
 export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
     try {
-        const response = await axios.post('http://localhost:5000/api/auth/login', user);
+        const response = await axios.post(`${API_BASE_URL}/auth/login`, user);
 
         if (response.data) {
             localStorage.setItem('user', JSON.stringify(response.data));
@@ -66,7 +68,7 @@ export const updateProfile = createAsyncThunk(
                     Authorization: `Bearer ${token}`,
                 },
             };
-            const response = await axios.put('http://localhost:5000/api/auth/profile', userData, config);
+            const response = await axios.put(`${API_BASE_URL}/auth/profile`, userData, config);
 
             if (response.data) {
                 localStorage.setItem('user', JSON.stringify(response.data));

@@ -9,7 +9,7 @@ const initialState = {
     message: '',
 };
 
-const API_URL = 'http://localhost:5000/api/applications/';
+const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api') + '/applications/';
 
 // Apply for a job
 export const applyForJob = createAsyncThunk(
