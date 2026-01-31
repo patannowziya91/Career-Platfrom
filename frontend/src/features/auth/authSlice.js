@@ -71,9 +71,41 @@ export const updateProfile = createAsyncThunk(
             const response = await axios.put(`${API_BASE_URL}/auth/profile`, userData, config);
 
             if (response.data) {
-                localStorage.setItem('user', JSON.stringify(response.data));
+                // Keep the token from the current state
+                const fullData = { ...response.data, token };
+                localStorage.setItem('user', JSON.stringify(fullData));
+                return fullData;
             }
 
+            return response.data;
+        } catch (error) {
+            const message =
+                (error.response && error.response.data && error.response.data.message) ||
+                error.message ||
+                error.toString();
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+);
+
+// Get current user data
+export const getMe = createAsyncThunk(
+    'auth/getMe',
+    async (_, thunkAPI) => {
+        try {
+            const token = thunkAPI.getState().auth.user.token;
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            };
+            const response = await axios.get(`${API_BASE_URL}/auth/me`, config);
+
+            if (response.data) {
+                const fullData = { ...response.data, token };
+                localStorage.setItem('user', JSON.stringify(fullData));
+                return fullData;
+            }
             return response.data;
         } catch (error) {
             const message =
@@ -143,6 +175,9 @@ export const authSlice = createSlice({
                 state.isLoading = false;
                 state.isError = true;
                 state.message = action.payload;
+            })
+            .addCase(getMe.fulfilled, (state, action) => {
+                state.user = action.payload;
             })
             .addCase(logout.fulfilled, (state) => {
                 state.user = null;

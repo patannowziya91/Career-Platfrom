@@ -12,8 +12,20 @@ import JobApplications from './pages/JobApplications';
 import EditProfile from './pages/EditProfile';
 import JobApply from './pages/JobApply';
 import PrivateRoute from './components/PrivateRoute';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMe } from './features/auth/authSlice';
 
 function App() {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (user) {
+      dispatch(getMe());
+    }
+  }, [dispatch]);
+
   return (
     <Router>
       <div className="min-h-screen">

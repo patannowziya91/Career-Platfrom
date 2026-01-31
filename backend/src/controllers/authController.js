@@ -37,6 +37,14 @@ exports.register = async (req, res) => {
                 name: user.name,
                 email: user.email,
                 role: user.role,
+                company: user.company,
+                about: user.about,
+                professionalRole: user.professionalRole,
+                skills: user.skills,
+                experience: user.experience,
+                education: user.education,
+                resume: user.resume,
+                profilePicture: user.profilePicture,
                 token: generateToken(user._id),
             });
         } else {
@@ -63,6 +71,14 @@ exports.login = async (req, res) => {
                 name: user.name,
                 email: user.email,
                 role: user.role,
+                company: user.company,
+                about: user.about,
+                professionalRole: user.professionalRole,
+                skills: user.skills,
+                experience: user.experience,
+                education: user.education,
+                resume: user.resume,
+                profilePicture: user.profilePicture,
                 token: generateToken(user._id),
             });
         } else {
