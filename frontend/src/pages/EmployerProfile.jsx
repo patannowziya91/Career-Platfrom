@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { updateProfile, reset } from '../features/auth/authSlice';
+import { Loader2 } from 'lucide-react';
 
 const EmployerProfile = () => {
-    const { user, isSuccess, isError, message } = useSelector((state) => state.auth);
+    const { user, isLoading, isSuccess, isError, message } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -137,9 +138,17 @@ const EmployerProfile = () => {
                             <div className="flex justify-end pt-6">
                                 <button
                                     type="submit"
-                                    className="px-10 py-4 bg-indigo-600 text-white font-bold rounded-2xl hover:bg-indigo-700 transform hover:-translate-y-1 transition-all shadow-lg hover:shadow-indigo-200"
+                                    disabled={isLoading}
+                                    className="px-10 py-4 bg-indigo-600 text-white font-bold rounded-2xl hover:bg-indigo-700 transform hover:-translate-y-1 transition-all shadow-lg hover:shadow-indigo-200 flex items-center justify-center min-w-[220px] disabled:opacity-70 disabled:cursor-not-allowed"
                                 >
-                                    Save Profile Changes
+                                    {isLoading ? (
+                                        <>
+                                            <Loader2 className="animate-spin mr-2" size={20} />
+                                            Saving Changes...
+                                        </>
+                                    ) : (
+                                        'Save Profile Changes'
+                                    )}
                                 </button>
                             </div>
                         </form>

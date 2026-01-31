@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateProfile, reset } from '../features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
+import { Loader2 } from 'lucide-react';
 
 const EditProfile = () => {
     const [formData, setFormData] = useState({
@@ -18,7 +19,7 @@ const EditProfile = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const { user, isSuccess, isError, message } = useSelector((state) => state.auth);
+    const { user, isLoading, isSuccess, isError, message } = useSelector((state) => state.auth);
 
     useEffect(() => {
         if (user) {
@@ -144,9 +145,17 @@ const EditProfile = () => {
                         </button>
                         <button
                             type="submit"
-                            className="bg-indigo-600 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none"
+                            disabled={isLoading}
+                            className="bg-indigo-600 py-2.5 px-6 border border-transparent rounded-xl shadow-sm text-sm font-bold text-white hover:bg-indigo-700 focus:outline-none flex items-center justify-center min-w-[140px] disabled:opacity-70 disabled:cursor-not-allowed transition-all"
                         >
-                            Save Changes
+                            {isLoading ? (
+                                <>
+                                    <Loader2 className="animate-spin mr-2" size={18} />
+                                    Saving...
+                                </>
+                            ) : (
+                                'Save Changes'
+                            )}
                         </button>
                     </div>
                 </form>
